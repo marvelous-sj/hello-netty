@@ -29,7 +29,7 @@ public class CustomHander extends SimpleChannelInboundHandler<HttpObject> {
             response.headers().set(HttpHeaderNames.CONTENT_TYPE,"text/plain");
             response.headers().set(HttpHeaderNames.CONTENT_LENGTH,content.readableBytes());
             //把响应刷新到客户端
-            ctx.writeAndFlush(response)
+            ctx.writeAndFlush(response);
         }
 
     }
