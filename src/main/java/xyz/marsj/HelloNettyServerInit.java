@@ -17,6 +17,6 @@ public class HelloNettyServerInit extends ChannelInitializer<SocketChannel> {
         //http编解码
         pipeline.addLast("HttpServerCodec",new HttpServerCodec());
         //自定义助手类,此处用于返回hello netty
-        pipeline.addLast("CustomHander",null);
+        pipeline.addLast("CustomHander",new CustomHander());
     }
 }
