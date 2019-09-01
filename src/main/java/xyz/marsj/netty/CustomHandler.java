@@ -1,4 +1,4 @@
-package xyz.marsj;
+package xyz.marsj.netty;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -14,7 +14,7 @@ import io.netty.util.CharsetUtil;
  * @Create: 2018-11-12 21:47
  **/
 //请求入站
-public class CustomHander extends SimpleChannelInboundHandler<HttpObject> {
+public class CustomHandler extends SimpleChannelInboundHandler<HttpObject> {
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
         Channel channel = ctx.channel();
         if(msg instanceof HttpRequest)

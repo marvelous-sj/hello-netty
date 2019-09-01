@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NETTY</title>
+</head>
+<body>
+<p>发送消息</p>
+<input type="text" id="msg">
+<button id="send" onclick="NETTY.chart()">发送</button>
+<p>接受消息</p>
+<div id="receive" style="background: red"></div>
+</body>
+<script>
+    window.NETTY={
+        socket:null,
+        init:function(){
+            if(window.WebSocket){
+                NETTY.socket=new WebSocket("ws://192.168.0.105:8088/marsj");
+                NETTY.socket.onopen=function(){
+                    console.log("连接建立成功~");
+                },
+                    NETTY.socket.onclose=function(){
+                        console.log("连接关闭");
+                    },
+                    NETTY.socket.onerror=function(){
+                        console.log("连接错误");
+                    },
+                    NETTY.socket.onmessage=function(e){
+                        console.log("接收到消息"+e.data);
+                        let msg = document.getElementById("receive");
+                        msg.innerHTML= msg.innerHTML+'<br>'+e.data;
+                    }
+            }else{
+                alert("浏览器不支持webSocket,请升级浏览器~");
+            }
+
+
+        },
+        chart:function(){
+            let msg=document.getElementById("msg");
+            NETTY.socket.send(msg.value);
+        }
+    }
+    NETTY.init();
+</script>
+</html>

@@ -1,4 +1,4 @@
-package xyz.marsj;
+package xyz.marsj.netty;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
@@ -17,6 +17,6 @@ public class HelloNettyServerInit extends ChannelInitializer<SocketChannel> {
         //http编解码
         pipeline.addLast("HttpServerCodec",new HttpServerCodec());
         //自定义助手类,此处用于返回hello netty
-        pipeline.addLast("CustomHander",new CustomHander());
+        pipeline.addLast("CustomHandler",new CustomHandler());
     }
 }
