@@ -21,7 +21,7 @@ public class CustomHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         //客户端发送的消息
         String content = msg.text();
-        System.out.println(content);
+        System.out.println("消息为:"+content);
 
         clients.writeAndFlush(new TextWebSocketFrame(LocalDateTime.now() + "服务端接受到消息,消息为:" + content));
         //两种操作效果一致
@@ -33,6 +33,7 @@ public class CustomHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         clients.add(ctx.channel());
+        System.out.println("客户端连接，ip为:"+ctx.channel().remoteAddress());
         System.out.println("客户端连接，长id为:"+ctx.channel().id().asLongText());
     }
 
@@ -40,6 +41,7 @@ public class CustomHandler extends SimpleChannelInboundHandler<TextWebSocketFram
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         //ChannelGroup会自动移除客户端的channel
         //clients.remove(ctx.channel());
+        System.out.println("客户端断开，ip为:"+ctx.channel().remoteAddress());
         System.out.println("客户端断开，长id为:"+ctx.channel().id().asLongText());
     }
 }
